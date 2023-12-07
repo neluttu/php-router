@@ -5,14 +5,12 @@ use Core\Validator;
 
 $db = App::resolve(Database::class);
 
-$userID = 1;
-
 $note = $db->query('SELECT * FROM notes WHERE id = :id', 
                     [
                         'id' => $_POST['id']
                     ])->findOrFail();
 
-authorize($note['user_id'] === $userID);
+authorize($note['user_id'] === $_SESSION['user']['id']);
 
 $errors = [];
 

@@ -19,6 +19,7 @@ $router->get('/notes/create', 'notes/create.php');
 $router->delete('/notes', 'notes/destroy.php')->only('auth');
 
 $router->get('/note/edit/{id}', 'notes/edit.php');
+
 $router->patch('/note', 'notes/update.php');
 
 $router->get('/register', 'register/create.php')->only('guest');

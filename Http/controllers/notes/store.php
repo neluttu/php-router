@@ -21,7 +21,7 @@ if(!empty($errors)) {
 
 $db->query("INSERT INTO notes (note, user_id) VALUES (:note, :user_id)", [
     'note' => $_POST['note'],
-    'user_id' => 1
+    'user_id' => $_SESSION['user']['id']
 ]);
 
 header('Location: /notes');
