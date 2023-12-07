@@ -1,0 +1,5 @@
+<?
+view('contact.view.php',[
+    'heading' => 'Contact me'
+]);
+?>
