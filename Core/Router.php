@@ -58,20 +58,41 @@ class Router {
         // $route['uri'] = /notes/user/{user}
 
         foreach($this->routes as $route) {
-            
 
-            //echo 'Verific ruta: ' . $route['uri'] .'<br>';
+            $getParams = self::getParamMatches($uri, $route['uri']);
+            $reqUri = $getParams['reqUri'];
+            $params = $getParams['params'];
+
+
+            if((preg_match("/$reqUri/", $route['uri']) or $route['uri'] === $uri) and $route['method'] === strtoupper($method))
+            {
+                
+                Middleware::resolve($route['middleware']);    
+                return require base_path('Http/controllers/' . $route['controller']);
+            }
+
+        }
+        $this->abort();
+    }
+
+    protected function abort($code = 404) {
+        http_response_code($code);
+        require base_path("views/{$code}.php");
+    }
+
+    protected static function getParamMatches($uri, $route) {
+
             $params = [];
             $paramKey = [];
             
-            preg_match_all("/(?<={).+?(?=})/", $route['uri'], $paramMatches);
+            preg_match_all("/(?<={).+?(?=})/", $route, $paramMatches);
 
             if(!empty($paramMatches)) {
                 foreach($paramMatches[0] as $key)
                 $paramKey[] = $key;
 
                 $reqUri = $uri;
-                $URI = explode("/", $route['uri']);
+                $URI = explode("/", $route);
 
                 $indexNum = [];
 
@@ -90,24 +111,10 @@ class Router {
 
                 $reqUri = implode("/", $reqUri);
                 $reqUri = str_replace("/", '\\/', $reqUri);
-
-            }
-
-
-            if((preg_match("/$reqUri/", $route['uri']) or $route['uri'] === $uri) and $route['method'] === strtoupper($method))
-            {
                 
-                Middleware::resolve($route['middleware']);    
-                return require base_path('Http/controllers/' . $route['controller']);
-            }
-
+                return ['reqUri' => $reqUri, 'params' => $params];
         }
-        $this->abort();
-    }
 
-    protected function abort($code = 404) {
-        http_response_code($code);
-        require base_path("views/{$code}.php");
     }
 }
 
