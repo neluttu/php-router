@@ -40,10 +40,14 @@ else {
         'name' => 'Neluttu'
     ]);
 
-    login([
+    $_SESSION['user'] = [
         'email' => $email,
-        'name' => 'Neluttu'
-    ]);
+        'name' => 'Neluttu',
+        'id' => $db->getLastID()
+    ];
 
-    header('Location: /');
+    dd($_SESSION);
+    session_regenerate_id(true);
+
+    header('Location: /notes');
 }

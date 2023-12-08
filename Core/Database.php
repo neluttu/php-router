@@ -27,8 +27,13 @@ class Database
         return $this;
     }
 
+
     public function get() {
         return $this->statement->fetchAll();
+    }
+
+    public function getLastID() {
+        return (int)$this->connection->lastInsertId();
     }
 
     public function find()
