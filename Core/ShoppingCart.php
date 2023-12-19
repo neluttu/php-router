@@ -17,9 +17,7 @@ class ShoppingCart
 
     public function addProduct($product)
     {
-        $inCart = $this->isProductInCart($product);
-
-        if (!$inCart) {
+        if (!$this->isProductInCart($product)) {
             $cartKey = uniqid();
             $_SESSION[$this->sessionKey][$cartKey] = [
                 'id' => (int) $product['id'],
@@ -29,7 +27,7 @@ class ShoppingCart
                 'features' => $this->extractProductFeatures($product),
             ];
 
-            return 'Product added to your shopping cart!';
+            return 'Product added to your <a href="/cart" class="underline">shopping cart!</a>';
         } else {
             return 'Product already in cart, visit <a href="/cart" class="underline">your cart</a> to update the quantity if desired.';
         }
@@ -79,4 +77,28 @@ class ShoppingCart
             return 'Product does not exist in the shopping cart...';
         }
     }    
+
+    public static function getTotalItemsInCart() {
+        $TotalItemsInCart = 0;
+            if(!empty($_SESSION["cart"])) {
+            
+            foreach($_SESSION['cart'] as $_ => $value) {
+                $TotalItemsInCart += (int) $value['quantity'];
+            }
+            return $TotalItemsInCart;
+        }
+        else return 0;
+    }
+
+    public static function getCartPrice() {
+        $Price = 0;
+        if(!empty($_SESSION["cart"])) {
+            
+            foreach($_SESSION['cart'] as $_ => $value) {
+                $Price += (float) $value['price'] * (int) $value['quantity'];
+            }
+            return '$' . number_format($Price, 2);
+        }
+        else return 0;
+    }
 }

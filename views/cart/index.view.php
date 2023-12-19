@@ -24,8 +24,8 @@
                     <p class="flex items-center justify-start flex-1">
                         <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>"><img src="/images/products/<?=$product['id']?>.jpg" class="w-[80px] aspect-square inline mr-3 rounded-md"></a>
                         <? 
-                            echo $product['name']. '<br>';
-                            echo implode(',', $product['features']);
+                            echo '<a href="product/'. slug($product['name']) . '/' . $product['id'] .'" class="block hover:underline">' . $product['name'];
+                            echo '<br>' . implode(',', $product['features']). '</a>';
                         ?>
                     </p>
                     <p class="pr-4">$<?=$product['price']; ?></p>

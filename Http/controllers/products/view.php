@@ -9,7 +9,7 @@ $product = $db->query('SELECT * FROM products WHERE id = :id',
                     ])->findOrFail();
                     
 view('products/view', [
-    'heading' => 'Products',
+    'heading' => $product['name'],
     'product' => $product
 ]);
 ?>

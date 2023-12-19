@@ -43,9 +43,15 @@ $products = $db->query('SELECT * FROM products WHERE category = :id',
                     [
                         'id' => $params['id']
                     ])->get();
-                    
+
+$category = $db->query('SELECT name FROM categories WHERE id = :id', 
+                        [
+                            'id' => $params['id']
+                        ]
+                        )->find();
+
 view('products/products', [
-    'heading' => 'Products',
+    'heading' => $category['name'],
     'products' => $products,
     'Result' => $Result
 ]);

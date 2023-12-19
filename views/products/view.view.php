@@ -10,7 +10,7 @@
         <? endif ?>
 
         <h1 class="mb-4 text-2xl font-semibold">
-            <?=$product['name'] . '<br><br> Price: ' . $product['price'] . '$' ?>
+            <?='Price: ' . $product['price'] . '$' ?>
         </h1>
         <img src="/images/products/<?=$product['id']?>.jpg" class="max-w-[460px]">
                     <form name="" method="post" action="/product/<?=slug($product['name']) ?>/<?=$product['category']?>">
@@ -35,6 +35,11 @@
                             <option>9</option>
                             <option>10</option>
                         </select>
+                        <? if($product['apple_care'] != null) { ?>
+                        <label for="apple_care" class="inline-flex items-center justify-center gap-2 cursor-pointer">
+                            <input type="checkbox" value="<?=$product['apple_care']?>" id="apple_care" name="apple_care"> <span>Apple Care</span>
+                        </label>
+                        <? } ?>          
                         <button type="submit" class="px-3 py-2 mt-4 bg-white border">
                             Add to cart
                         </button>

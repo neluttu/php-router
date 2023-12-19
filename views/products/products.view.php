@@ -1,10 +1,8 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
-
 <main>
     <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <h1 class="mb-4 text-2xl font-semibold">Online shopping:</h1>
         <ul class="flex flex-wrap items-center justify-start gap-4">
             <? foreach($products as $product) :?>
                 <li class="min-w-[240px] text-lg shadow-md bg-white pb-2">
@@ -17,5 +15,4 @@
         </ul>
     </div>
 </main>
-
 <? require base_path('views/partials/footer.php'); ?>
