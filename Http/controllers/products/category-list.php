@@ -1,0 +1,3 @@
+<?
+echo $params['category'];
+?>

@@ -63,7 +63,6 @@ class Router {
             $reqUri = $getParams['reqUri'];
             $params = $getParams['params'];
 
-
             if((preg_match("/$reqUri/", $route['uri']) or $route['uri'] === $uri) and $route['method'] === strtoupper($method))
             {
                 

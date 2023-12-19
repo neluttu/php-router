@@ -16,7 +16,7 @@ if(! Validator::string($password, 7, 255))
 
 
 if(!empty($errors)) {
-    return view('registration/create.view.php', [
+    return view('registration/create', [
         'errors' => $errors,
         'heading' => 'Registration'
     ]);

@@ -2,7 +2,7 @@
 
 use Core\Session;
 
-view('session/create.view.php',[
+view('session/create',[
     'heading' => 'Your account',
     'errors' => Session::get('errors')
 ]);

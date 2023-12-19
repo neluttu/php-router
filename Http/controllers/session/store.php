@@ -1,5 +1,4 @@
 <?
-
 use Core\Authenticator;
 use Http\Forms\LoginForm;
 use Core\Session;

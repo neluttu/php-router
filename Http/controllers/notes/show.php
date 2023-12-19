@@ -11,7 +11,7 @@ $note = $db->query('SELECT * FROM notes WHERE id = :id',
 
 authorize($note['user_id'] === $_SESSION['user']['id']);
 
-view('notes/note.view.php', [
+view('notes/note', [
     'heading' => 'View note',
     'note' => $note
 ]);

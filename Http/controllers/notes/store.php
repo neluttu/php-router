@@ -12,7 +12,7 @@ if(!Validator::string($_POST['note'], 1, 500)) {
 }
 
 if(!empty($errors)) { 
-    return view('notes/create.view.php', [
+    return view('notes/create', [
         'heading' => 'Create new note',
         'errors' => $errors
     ]);

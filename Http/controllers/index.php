@@ -1,7 +1,7 @@
 <?
 $heading = 'Home';
 
-view('index.view.php', [
+view('index', [
     'heading' => $heading
 ]);
 ?>

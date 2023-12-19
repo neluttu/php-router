@@ -41,6 +41,10 @@ class Database
         return $this->statement->fetch();
     }
 
+    public function totlaRows() {
+        return $this->statement->rowCount();
+    }
+
     public function findOrFail()
     {
         $result = $this->find();

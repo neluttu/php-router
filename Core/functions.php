@@ -38,7 +38,7 @@ function base_path($path) {
 
 function view($view, $attributes = []) {
     extract($attributes);
-    require base_path('views/' . $view);
+    require base_path('views/' . $view . '.view.php');
 }
 
 
@@ -57,4 +57,16 @@ function logout() {
 function old($key, $default = '') {
     return Core\Session::get('old')['email'] ?? $default;
 }
-?>
+
+function slug($string) {
+    // Transformăm string-ul în litere mici
+    $string = strtolower($string);
+
+    // Înlocuim spațiile cu liniuțe inferioare
+    $string = str_replace(' ', '-', $string);
+
+    // Eliminăm caracterele speciale
+    $string = preg_replace('/[^a-z0-9-]/', '', $string);
+
+    return $string;
+}

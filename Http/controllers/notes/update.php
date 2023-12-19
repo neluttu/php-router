@@ -19,7 +19,7 @@ if(!Validator::string($_POST['note'], 1, 500)) {
 }
 
 if(!empty($errors)) { 
-    return view('notes/edit.view.php', [
+    return view('notes/edit', [
         'heading' => 'Edit note',
         'errors' => $errors,
         'note' => $note

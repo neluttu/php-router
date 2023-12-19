@@ -1,6 +1,6 @@
 <?
 
-view('registration/create.view.php', [
+view('registration/create', [
     'heading' => 'Your account',
     'errors' => []
 ]);
