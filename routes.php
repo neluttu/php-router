@@ -16,30 +16,39 @@ $router->post('/products/{category}/{id}', 'products/products.php');
 
 $router->get('/cart', '/cart/index.php');
 $router->post('/cart', '/cart/update-cart.php');
+$router->get('/checkout', 'cart/checkout.php');
 
-$router->get('/notes', 'notes/index.php')->only('auth');
+$router->get('/notes', 'notes/index.php')->only('auth', '/login');
 
-$router->get('/note/{id}', 'notes/show.php')->only('auth');
+$router->get('/note/{id}', 'notes/show.php')->only('auth', '/login');
 
-$router->post('/notes', 'notes/store.php')->only('auth');
+$router->post('/notes', 'notes/store.php')->only('auth', '/login');
 
-$router->get('/notes/create', 'notes/create.php');
+$router->get('/notes/create', 'notes/create.php')->only('auth', '/login');
 
-$router->delete('/notes', 'notes/destroy.php')->only('auth');
+$router->delete('/notes', 'notes/destroy.php')->only('auth', '/login');
 
-$router->get('/note/edit/{id}', 'notes/edit.php');
+$router->get('/note/edit/{id}', 'notes/edit.php')->only('auth', '/login');
 
-$router->patch('/note', 'notes/update.php');
+$router->patch('/note', 'notes/update.php')->only('auth', '/login');
 
-$router->get('/register', 'register/create.php')->only('guest');
-$router->post('/register', 'register/store.php')->only('guest');
+$router->get('/account', 'account/index.php')->only('auth', '/login');
+$router->get('/account', 'account/orders.php')->only('auth', '/login');
 
-$router->get('/login', 'session/create.php')->only('guest');
-$router->post('/session', 'session/store.php')->only('guest');
-$router->delete('/logout', 'session/destroy.php')->only('auth');
-$router->delete('/logout', function () { 
-                                Core\Session::destroy();
-                                redirect();
-                            });
+
+$router->get('/register', 'register/index.php')->only('guest', '/account');
+
+$router->post('/register', 'register/store.php')->only('guest', '/account');
+
+$router->get('/login', 'session/create.php')->only('guest', '/account');
+$router->post('/session', 'session/store.php')->only('guest', '/account');
+$router->delete('/logout', 'session/destroy.php')->only('auth', '/login');
+
+
+
+// $router->delete('/logout', function () { 
+//                                 Core\Session::destroy();
+//                                 redirect();
+//                             });
 
 ?>

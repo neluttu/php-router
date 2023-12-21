@@ -16,7 +16,7 @@ $form = new LoginForm();
 if ($form->validate($email, $password)) {
 
     // Authorize user
-    if ((new Authenticator)->attempt($email, $password)) redirect('/notes'); // Redirect to home page (index.php)
+    if ((new Authenticator)->attempt($email, $password)) redirect('/account'); // Redirect to home page (index.php)
 
     // if failed login
     $form->appendError('email', 'No matching account found.');

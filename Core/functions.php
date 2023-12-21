@@ -18,15 +18,8 @@ function abort($code = 404) {
     require base_path("views/{$code}.php");
 
     die();
-
 }
 
-function routeToController($uri, $routes) {
-    if (array_key_exists($uri, $routes))
-        require $routes[$uri];
-    else 
-        abort();
-}
 
 function authorize($condition, $status = Response::FORBIDDEN) {
     if(!$condition) abort($status);
@@ -47,26 +40,12 @@ function redirect ($path = '/') {
     die();
 }
 
-function logout() {
-    $_SESSION = [];
-    session_destroy();
-
-    header('Location: /');
-}    
-
 function old($key, $default = '') {
-    return Core\Session::get('old')['email'] ?? $default;
+    return Core\Session::get('old')[$key] ?? $default;
 }
 
+
 function slug($string) {
-    // Transformăm string-ul în litere mici
-    $string = strtolower($string);
-
-    // Înlocuim spațiile cu liniuțe inferioare
-    $string = str_replace(' ', '-', $string);
-
-    // Eliminăm caracterele speciale
-    $string = preg_replace('/[^a-z0-9-]/', '', $string);
-
+    $string = preg_replace('/[^a-z0-9-]/', '', str_replace(' ', '-', strtolower($string)));
     return $string;
 }

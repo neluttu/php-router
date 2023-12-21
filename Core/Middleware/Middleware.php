@@ -8,7 +8,7 @@ class Middleware {
         'auth' => Auth::class
     ];
 
-    public static function resolve($key) {
+    public static function resolve($key, $redirect) {
         if(!$key) return;
 
         $middleware = static::MAP[$key] ?? false;
@@ -19,7 +19,7 @@ class Middleware {
         }
 
         // altfel, continua scriptul.
-        (new $middleware)->handle();
+        (new $middleware)->handle($redirect);
     }
 
 }

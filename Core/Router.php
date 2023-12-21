@@ -13,7 +13,8 @@ class Router {
             'uri' => $uri,
             'controller' => $controller,
             'method' => $method,
-            'middleware' => null
+            'middleware' => null,
+            'redirect' => null
         ];
 
         return $this;
@@ -45,8 +46,9 @@ class Router {
     }
 
     // grab the last added route and add the middleware key.
-    public function only($key) {
+    public function only($key, $redirect = null) {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+        $this->routes[array_key_last($this->routes)]['redirect'] = $redirect;
         return $this;
     }
 
@@ -66,7 +68,7 @@ class Router {
             if((preg_match("/$reqUri/", $route['uri']) or $route['uri'] === $uri) and $route['method'] === strtoupper($method))
             {
                 
-                Middleware::resolve($route['middleware']);    
+                Middleware::resolve($route['middleware'], $route['redirect']);    
                 return require base_path('Http/controllers/' . $route['controller']);
             }
 

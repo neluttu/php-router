@@ -25,7 +25,7 @@
                         <a href="product/<?=slug($product['name'])?>/<?=$product['id']?>"><img src="/images/products/<?=$product['id']?>.jpg" class="w-[80px] aspect-square inline mr-3 rounded-md"></a>
                         <? 
                             echo '<a href="product/'. slug($product['name']) . '/' . $product['id'] .'" class="block hover:underline">' . $product['name'];
-                            echo '<br>' . implode(',', $product['features']). '</a>';
+                            echo '<br>' . implode(', ', $product['features']). '</a>';
                         ?>
                     </p>
                     <p class="pr-4">$<?=$product['price']; ?></p>
@@ -54,6 +54,9 @@
         <p class="flex items-center justify-end mt-3 text-lg font-semibold">
             <?= '$' . number_format($Total, 2);?> total price.
         </p>
+        <div class="flex items-center justify-end">
+            <button class="px-3 py-2 mt-3 text-white bg-orange-500 border border-orange-600 rounded-md">Check out</button>
+        </div>
     </div>
 </main>
 <? require base_path('views/partials/footer.php'); ?>

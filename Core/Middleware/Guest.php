@@ -3,11 +3,10 @@ namespace Core\Middleware;
 
 class Guest {
     
-    public function handle() {
-
+    public function handle($redirect) {
         if($_SESSION['user'] ?? false) {
 
-            header('Location: /notes');
+            header('Location: ' . $redirect ?? '/');
             exit();
         }
     }

@@ -3,11 +3,11 @@ namespace Core\Middleware;
 
 class Auth {
 
-    public function handle() {
+    public function handle($redirect) {
 
         if(! $_SESSION['user'] ?? false)  {
             
-            header('Location: /');
+            header('Location: ' . $redirect ?? '/');
             exit();
         }
     }

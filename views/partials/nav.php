@@ -36,7 +36,7 @@
                 <button type="button" class="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>
                   <? if($_SESSION['user'] ?? false) : ?>
-                  <img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/25511379?v=4" alt="">
+                    <a href="/account"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/25511379?v=4" alt=""></a>
                     <? else : ?>
                         <a href="/register" class="pr-3 text-white">Register</a>
                         <a href="/login" class="text-white">Login</a>

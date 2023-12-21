@@ -1,53 +1,48 @@
 <?
-use Core\Validator;
 use Core\App;
-use Core\Database;
+use Http\Forms\RegisterForm;
+use Core\Session;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$phone = $_POST['phone'];
 
-// validate email and password
+$form = new RegisterForm();
 
-if(! Validator::email($email))
-    $errors['email'] = 'Please provide a valid email';
+$db = App::resolve(Core\Database::class);
+$user = $db->query("SELECT * FROM users WHERE email = :email", [':email' => $email])->find();
 
-if(! Validator::string($password, 7, 255))
-    $errors['password'] = 'Password must be at least 7 characters long and at least 255 characters.';
+if(!$form->validate($email, $password, $firstname, $lastname, $phone) or $user) {
 
+    if($user) $form->appendError('email', 'This email is already registered...');
 
-if(!empty($errors)) {
-    return view('registration/create', [
-        'errors' => $errors,
-        'heading' => 'Registration'
-    ]);
-}    
-
-$db = App::resolve(Database::class);
-
-$user = $db->query("SELECT * FROM users WHERE email = :email", [
-    ':email' => $email
-])->find();
-
-
-if($user) {
-    header('Location: /');
-    exit();
-}
-else {
-    $db->query("INSERT INTO users(email, password, name) VALUES (:email, :password, :name)",[
+    Session::flash('errors', $form->errors());
+    Session::flash('old', [ 
         'email' => $email,
-        'password' => password_hash($password, PASSWORD_BCRYPT),
-        'name' => 'Neluttu'
-    ]);
-
-    $_SESSION['user'] = [
-        'email' => $email,
-        'name' => 'Neluttu',
-        'id' => $db->getLastID()
-    ];
-
-    dd($_SESSION);
-    session_regenerate_id(true);
-
-    header('Location: /notes');
+        'firstname' => $firstname,
+        'lastname' => $lastname,
+        'phone' => $phone
+        ]);    
+        
+    redirect ('/register');
+    die();
 }
+
+$db->query("INSERT INTO users (email, password, firstname, lastname, phone) VALUES (:email, :password, :firstname, :lastname, :phone)",[
+    'email' => $email,
+    'password' => password_hash($password, PASSWORD_BCRYPT),
+    'firstname' => $firstname,
+    'lastname' => $lastname,
+    'phone' => $phone
+]);
+
+$_SESSION['user'] = [
+    'email' => $email,
+    'name' => $firstname,
+    'id' => $db->getLastID()
+];
+
+session_regenerate_id(true);
+header('Location: /account');

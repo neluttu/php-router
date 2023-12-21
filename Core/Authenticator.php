@@ -16,7 +16,7 @@ class Authenticator {
             if(password_verify($password, $userData['password'])) {
                 $this->login([
                     'email' => $email,
-                    'name' => $userData['name'],
+                    'name' => $userData['firstname'],
                     'id' => $userData['id'],
                 ]);
                 
@@ -32,7 +32,7 @@ class Authenticator {
 
         $_SESSION['user'] = [
             'email' => $userData['email'],
-            'name' => $userData['name'],
+            'name' => $userData['firstname'],
             'id' => $userData['id']
         ];
     
@@ -40,9 +40,9 @@ class Authenticator {
     
     }
 
-    public function logout() {
+    // public function logout() {
 
-        Session::destroy();
-    }
+    //     Session::destroy();
+    // }
     
 }
