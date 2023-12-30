@@ -13,8 +13,8 @@ class RegisterForm {
         if(!Validator::email($email))
             $this->errors['email'] = 'Please provide a valid email';
         
-        if(!Validator::string($password, 7, 255))
-            $this->errors['password'] = 'Password must be at least 7 characters long and at least 255 characters.';
+        if(!Validator::password($password))
+            $this->errors['password'] = 'Password must contain: minimum 8 characters, one UPPERCASE and one speci@l symbol.';
 
         if(!Validator::name($firstname))
             $this->errors['firstname'] = 'Invalid firstname';

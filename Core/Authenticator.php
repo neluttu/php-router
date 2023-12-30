@@ -11,15 +11,15 @@ class Authenticator {
         $userData = App::resolve(Database::class)->query("SELECT * FROM users WHERE email = :email",[
             'email' => $email])->find();
 
+
         if($userData) {
-            
+
             if(password_verify($password, $userData['password'])) {
                 $this->login([
                     'email' => $email,
                     'name' => $userData['firstname'],
                     'id' => $userData['id'],
                 ]);
-                
                 return true;
             }
             
@@ -29,10 +29,9 @@ class Authenticator {
 
 
     public function login($userData) {
-
         $_SESSION['user'] = [
             'email' => $userData['email'],
-            'name' => $userData['firstname'],
+            'name' => $userData['name'],
             'id' => $userData['id']
         ];
     

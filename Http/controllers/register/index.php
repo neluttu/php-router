@@ -1,5 +1,4 @@
 <?
-
 use Core\Session;
 
 view('registration/index', [

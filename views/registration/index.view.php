@@ -41,10 +41,10 @@
                         <div class="my-6">
                             <button type="submit" class="w-full px-3 py-4 text-white bg-black rounded-md focus:bg-gray-600 focus:outline-none">Register</button>
                         </div>
-                        <p class="text-sm text-center text-gray-500">Already have an account?
+                        <p class="text-sm text-center text-gray-500">
+                            Already have an account?
                             <a href="/login"
-                                class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Login now
-                            </a>.
+                                class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Login now</a> or <a href="/reset-password" class="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">reset your password</a>
                         </p>
                     </form>
                 </div>

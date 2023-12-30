@@ -19,6 +19,4 @@ class App {
     public static function resolve($key) {
         return static::getContainer()->resolve($key);
     }
-
-
 }

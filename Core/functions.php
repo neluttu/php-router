@@ -49,3 +49,9 @@ function slug($string) {
     $string = preg_replace('/[^a-z0-9-]/', '', str_replace(' ', '-', strtolower($string)));
     return $string;
 }
+
+function generateToken($length = 32) {
+    $randomString = bin2hex(random_bytes($length));
+    // $randomString = hash('sha256', $randomString);
+    return $randomString;
+}

@@ -41,10 +41,16 @@ $router->get('/register', 'register/index.php')->only('guest', '/account');
 $router->post('/register', 'register/store.php')->only('guest', '/account');
 
 $router->get('/login', 'session/create.php')->only('guest', '/account');
+
+$router->get('/reset-password', 'session/reset-password.php')->only('guest', '/account');
+$router->post('/reset-password', 'session/send-link.php')->only('guest', '/account');
+
+$router->get('/set-password/{token}', 'session/set-password.php')->only('guest', '/account');
+$router->post('/set-password/{token}', 'session/update-password.php')->only('guest', '/account');
+
+
 $router->post('/session', 'session/store.php')->only('guest', '/account');
 $router->delete('/logout', 'session/destroy.php')->only('auth', '/login');
-
-
 
 // $router->delete('/logout', function () { 
 //                                 Core\Session::destroy();
