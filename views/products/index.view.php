@@ -8,7 +8,7 @@
         <? foreach($categories as $category) : ?>
             <li class="flex-1 min-w-[360px]">
                 <a href="/products/<?=slug($category['name']);?>/<?=$category['id']?>" class="text-lg font-semibold">
-                    <img src="images/img0<?=$category['id'];?>.webp" class="w-full mb-3">
+                    <img src="/images/img0<?=$category['id'];?>.webp" class="w-full mb-3">
                     <?=$category['name']; ?> (<?=$category['count']?> items)
                 </a>
             </li>

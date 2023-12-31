@@ -1,9 +1,17 @@
 <?
 namespace Core;
+
 use Core\Middleware\Middleware;
+
 class Router {
     protected $routes = [];
-    
+    protected $config;
+
+    public function __construct() {
+        $this->config = require base_path('config.php');
+        define('LANGS', $this->config['siteLangs']);
+    }
+
     protected function add($method, $uri, $controller) {
         
         //$this->routes[] = compact('method', 'uri', 'controller'); same as:
@@ -53,25 +61,44 @@ class Router {
 
     // load controller.
     public function route() {
+        
         $uri = rtrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
-        $method = strtoupper($_POST['_method'] ?? $_SERVER['REQUEST_METHOD']);        
+        $method = strtoupper($_POST['_method'] ?? $_SERVER['REQUEST_METHOD']);
+        
+
+        // Check if language is set
+        $checkURI = explode('/', $uri);
+        unset($checkURI[0]);
+        $checkURI = array_values($checkURI);
+        // Here we have the first URI part.
+
+        if(!empty($checkURI) and in_array($checkURI[0], $this->config['siteLangs'])) 
+            { $_SESSION['lang'] = $checkURI[0]; $urlLang = true;}
+        else {
+            $_SESSION['lang'] = $this->config['siteLangs'][0];
+            $urlLang = false;
+        }
+        
+        if(!$urlLang) $uri = '/' . $_SESSION['lang'] . $uri;
+
+        $uriSegments = explode('/', trim($uri, '/'));
+
 
         foreach($this->routes as $route) {
-            $uriSegmensts = explode('/', trim($uri, '/'));
             $routeSegments = explode('/', trim($route['uri'], '/'));
             $match = true;
 
-            if(count($uriSegmensts) === count($routeSegments) and $route['method'] === $method) {
+            if(count($uriSegments) === count($routeSegments) and $route['method'] === $method) {
                 $params = [];
                 $match = true;
-
-                for($i = 0; $i < count($uriSegmensts); $i++) { 
-                    if($routeSegments[$i] !== $uriSegmensts[$i] and !preg_match('/\{(.+?)\}/', $routeSegments[$i])){
+              
+                for($i = 0; $i < count($uriSegments); $i++) { 
+                    if($routeSegments[$i] !== $uriSegments[$i] and !preg_match('/\{(.+?)\}/', $routeSegments[$i])){
                         $match = false;
                         break;
                     }
                     if(preg_match('/\{(.+?)\}/', $routeSegments[$i], $matches))
-                        $params[$matches[1]] = $uriSegmensts[$i];
+                        $params[$matches[1]] = $uriSegments[$i];
                 }
                 if($match) {
                     Middleware::resolve($route['middleware'], $route['redirect']);    

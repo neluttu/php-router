@@ -1,6 +1,6 @@
 <?
-
 use Core\App;
+use Core\Session;
 
 $db = App::resolve('Core\Database');
 

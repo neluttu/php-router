@@ -40,7 +40,7 @@ if(empty($form->errors())) {
         $emailSender = new EmailSender();
         
         $emailSender->sendEmail(
-            $user['email'],
+            'ionel.olariu@gmail.com',
             'Subject of the Email',
             '../views/emails/ResetPasswordLink.html',
             ['name' => 'Neluttu',  'key' => $token->getToken()]
