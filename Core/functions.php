@@ -7,28 +7,37 @@ function dd($value) {
     echo '</pre>';
     die();
 }
+function d($value) {
+    echo '<pre class="text-slate-600">';
+    var_dump($value);
+    echo '</pre>';
+}
 
-function getLangURLs() {
+function getLangParam($uri) {
+    $checkURI = explode('/', $uri);
+    unset($checkURI[0]);
+    return array_values($checkURI);
+    
+}
+
+
+function getLangLinks() {
     $config = require base_path('config.php');
     $siteLangs = $config['siteLangs'];
+
     $LANGS = array_keys($siteLangs);
     $uri = rtrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
 
-    // Check if language is set
-    $checkURI = explode('/', $uri);
-    unset($checkURI[0]);
-    $checkURI = array_values($checkURI);
-    // Here we have the first URI partial, $checkURI[0].
+    $langParam = getLangParam($uri);
     
-    if(!empty($checkURI[0]) and in_array($checkURI[0], $LANGS))
+    if(!empty($langParam[0]) and in_array($langParam[0], $LANGS))
         $uri = substr($uri, 3);
-
-    
+   
     for($i=0; $i<count($LANGS);$i++) {
-        
+        // aici e eroarea cu footer link home page.
+        if($uri === '') $uri = '/';
         $langs[$siteLangs[$LANGS[$i]]] = ($i !== 0) ? '/' . $LANGS[$i] . $uri : $uri;
     }
-
     return $langs;
 }
 
@@ -54,12 +63,11 @@ function base_path($path) {
 function view($view, $attributes = []) {
     extract($attributes);
     // fail require needs fallback.
-    require base_path('Lang/' . \Core\Session::has('lang') .'.php');
     require base_path('views/' . $view . '.view.php');
 }
 
 function redirect ($path = '/') {
-    header('Location: '.$path);
+    header('Location: ' . Core\Session::getLang() . $path);
     die();
 }
 

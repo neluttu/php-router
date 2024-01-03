@@ -1,12 +1,16 @@
 <?
 return [
     'userForms' => [
-        'empty_password' => 'Password(s) cannot be empty',
-        'weak_password' => 'Your password musc contain at least one UPPERCASE  letter, one number and one speci@l character',
-        'password_verify' => 'Your passwords do not match.',
-        'invalid_email' => 'Please enter a valid email address',
-        'null_user' => 'This username does not exist',
-        'reset_token_valid' => 'We\'ve already sent a reset password link. You can request another one in about :minutes minutes.',
-        'reset_success' => 'We\'ve sent you a email with a password reset link.'
-        ]
-    ];
+        'empty_password' => 'Câmpul cu parola nu poate să fie gol.',
+        'weak_password' => 'Parola introdusă trebuie să conțină măcar o literă MARE, un număr și un caracter speci@l.',
+        'password_verify' => 'Parola de verificare nu corespunde cu parola aleasă.',
+        'invalid_email' => 'Te rugăm introdu o adresă de email corectă.',
+        'null_user' => 'Acest utilizator nu există.',
+        'reset_token_valid' => 'Am trimis deja un email de resetare parolă. Poți cere altul în aproximativ :minutes minute.',
+        'reset_success' => 'Ți-am trimis un email cu un link pentru a reseta parola contului tău.'
+    ],
+    'product' => [
+        'price' => 'Preț'
+    ]
+
+];

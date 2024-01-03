@@ -73,14 +73,12 @@ class Router {
 
         if(!empty($checkURI) and in_array($checkURI[0], LANGS)) 
         { 
-            $_SESSION['lang'] = $checkURI[0]; 
             $urlLang = true;
         }
         else {
-            $_SESSION['lang'] = LANGS[0];
             $urlLang = false;
         }
-        
+        Lang::loadLanguage();
         if(!$urlLang) $uri = '/' . $_SESSION['lang'] . $uri;
 
         foreach($this->routes as $route) {
