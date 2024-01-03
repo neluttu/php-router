@@ -13,7 +13,7 @@
             <?='Price: ' . $product['price'] . '$' ?>
         </h1>
         <img src="/images/products/<?=$product['id']?>.jpg" class="max-w-[460px]">
-                    <form name="" method="post" action="/product/<?=slug($product['name']) ?>/<?=$product['category']?>">
+                    <form name="" method="post">
                     <? if($product['color']) { ?>
                         <select name="color" class="p-2 mr-2 bg-white border">
                             <? foreach(explode(',', $product['color']) as $Color) echo '<option value="'.$Color.'">'.$Color.'</option>'; ?>

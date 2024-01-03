@@ -9,8 +9,10 @@ class Router {
 
     public function __construct() {
         $this->config = require base_path('config.php');
-        define('LANGS', $this->config['siteLangs']);
+        define('LANGS', array_keys($this->config['siteLangs']));
+        
     }
+
 
     protected function add($method, $uri, $controller) {
         
@@ -58,34 +60,32 @@ class Router {
         return $this;
     }
 
-
-    // load controller.
     public function route() {
         
         $uri = rtrim(parse_url($_SERVER['REQUEST_URI'])['path'], '/');
         $method = strtoupper($_POST['_method'] ?? $_SERVER['REQUEST_METHOD']);
-        
 
         // Check if language is set
         $checkURI = explode('/', $uri);
         unset($checkURI[0]);
         $checkURI = array_values($checkURI);
-        // Here we have the first URI part.
+        // Here we have the first URI partial.
 
-        if(!empty($checkURI) and in_array($checkURI[0], $this->config['siteLangs'])) 
-            { $_SESSION['lang'] = $checkURI[0]; $urlLang = true;}
+        if(!empty($checkURI) and in_array($checkURI[0], LANGS)) 
+        { 
+            $_SESSION['lang'] = $checkURI[0]; 
+            $urlLang = true;
+        }
         else {
-            $_SESSION['lang'] = $this->config['siteLangs'][0];
+            $_SESSION['lang'] = LANGS[0];
             $urlLang = false;
         }
         
         if(!$urlLang) $uri = '/' . $_SESSION['lang'] . $uri;
 
-        $uriSegments = explode('/', trim($uri, '/'));
-
-
         foreach($this->routes as $route) {
             $routeSegments = explode('/', trim($route['uri'], '/'));
+            $uriSegments = explode('/', trim($uri, '/'));
             $match = true;
 
             if(count($uriSegments) === count($routeSegments) and $route['method'] === $method) {

@@ -27,9 +27,9 @@ class ShoppingCart
                 'features' => $this->extractProductFeatures($product),
             ];
 
-            return 'Product added to your <a href="/cart" class="underline">shopping cart!</a>';
+            return 'Product added to your <a href="'.\Core\Session::getLang().'/cart" class="underline">shopping cart!</a>';
         } else {
-            return 'Product already in cart, visit <a href="/cart" class="underline">your cart</a> to update the quantity if desired.';
+            return 'Product already in cart, visit <a href="'.\Core\Session::getLang().'/cart" class="underline">your cart</a> to update the quantity if desired.';
         }
     }
 

@@ -15,6 +15,12 @@ class Session {
         return static::get($key);
     }
 
+    public static function getLang() { 
+        if($_SESSION['lang'] == 'ro') $uriLang = '';
+        else $uriLang = '/' . $_SESSION['lang'];
+        return $uriLang;
+    }
+
     public static function flash($key, $value) {
         $_SESSION['_flashed'][$key] = $value;
     }

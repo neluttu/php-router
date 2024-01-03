@@ -1,13 +1,14 @@
 <?
 namespace Http\Forms;
 use Core\Validator;
+use Core\Lang;
 
 class ResetForm {
     protected $errors = [];
     public function validate($email) {
 
         if(!Validator::email($email))
-            $this->errors['email'] = 'Please provide a valid email';
+            $this->errors['invalid_email'] = Lang::get('userForms.invalid_email');
         
         return empty($this->errors);
     }

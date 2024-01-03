@@ -22,4 +22,4 @@ Session::flash('cart_message', [
                     'result' => $result
             ]);
 
-return redirect('/product/' . slug($_POST['name']) . '/' . $_POST['id']);
+return redirect(Session::getLang() . '/product/' . slug($_POST['name']) . '/' . $_POST['id']);

@@ -8,18 +8,18 @@
           <div class="hidden md:block">
             <div class="flex items-baseline ml-10 space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="/" class="<?= urlIs('/') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                <a href="/about" class="<?= urlIs('/about') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
-                <? if($_SESSION['user'] ?? false) : ?> <a href="/notes" class="<?= urlIs('/notes') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Notes</a> <? endif; ?>
-                <a href="/contact" class="<?= urlIs('/contact') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                <a href="/products" class="<?= urlIs('/products') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Products</a>
+                <a href="<?= \Core\Session::getLang(); ?>/" class="<?= urlIs('/') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                <a href="<?= \Core\Session::getLang(); ?>/about" class="<?= urlIs('/about') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                <? if($_SESSION['user'] ?? false) : ?> <a href="<?= \Core\Session::getLang(); ?>/notes" class="<?= urlIs('/notes') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Notes</a> <? endif; ?>
+                <a href="<?= \Core\Session::getLang(); ?>/contact" class="<?= urlIs('/contact') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                <a href="<?= \Core\Session::getLang(); ?>/products" class="<?= urlIs('/products') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Products</a>
             </div>
           </div>
         </div>
         <div class="hidden md:block">
           <div class="flex items-center ml-4 md:ml-6">
             
-            <a href="/cart" class="flex items-center justify-center gap-3 text-white" title="<?php echo Core\ShoppingCart::getCartPrice(); ?>">
+            <a href="<?= \Core\Session::getLang(); ?>/cart" class="flex items-center justify-center gap-3 text-white" title="<?php echo Core\ShoppingCart::getCartPrice(); ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"  viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -36,16 +36,16 @@
                 <button type="button" class="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>
                   <? if($_SESSION['user'] ?? false) : ?>
-                    <a href="/account"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/25511379?v=4" alt=""></a>
+                    <a href="<?= \Core\Session::getLang(); ?>/account"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/25511379?v=4" alt=""></a>
                     <? else : ?>
-                        <a href="/register" class="pr-3 text-white">Register</a>
-                        <a href="/login" class="text-white">Login</a>
+                        <a href="<?= \Core\Session::getLang(); ?>/register" class="pr-3 text-white">Register</a>
+                        <a href="<?= \Core\Session::getLang(); ?>/login" class="text-white">Login</a>
                     <? endif; ?>        
                 </button>
               </div>
               <div class="relative ml-3">
                   <? if($_SESSION['user'] ?? false) : ?>
-                      <form method="post" action="/logout">
+                      <form method="post" action="<?= \Core\Session::getLang(); ?>/logout">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="text-white">
                             Logout

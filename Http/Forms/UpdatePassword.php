@@ -7,13 +7,13 @@ class UpdatePassword {
     public function validate($password, $password_verify) {
 
         if(empty($password) or empty($password_verify))
-            $this->errors['empty'] = 'Password fields must not be empty!';
+            $this->errors['empty'] = 'empty_password';
 
         if(!Validator::password($password))
-            $this->errors['password'] = 'Password is too weak.';
+            $this->errors['password'] = 'weak_password';
 
         if(!Validator::match($password, $password_verify))
-            $this->errors['password_verify'] = 'Passwords do not match...';
+            $this->errors['password_verify'] = 'password_verify';
 
         return empty($this->errors);
     }

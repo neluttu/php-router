@@ -10,10 +10,10 @@ class LoginForm {
     public function validate($email, $password) {
 
         if(!Validator::email($email))
-            $this->errors['email'] = 'Please provide a valid email';
+            $this->errors['email'] = 'invalid_email';
         
         if(!Validator::string($password, 7, 255))
-            $this->errors['password'] = 'Password must be at least 7 characters long and at least 255 characters.';
+            $this->errors['password'] = 'password_verify';
 
         return empty($this->errors);
     }

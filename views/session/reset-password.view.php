@@ -1,12 +1,11 @@
 <?php require base_path('views/partials/head.php'); ?>
 <?php require base_path('views/partials/nav.php'); ?>
 <?php require base_path('views/partials/banner.php'); ?>
-
 <main>
     <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <? if(!empty($errors)) : ?>
         <div class="w-full px-2 py-3 mb-4 bg-white border rounded-md text-rose-600 border-slate-300">
-        <?= $errors['email'] ?? $errors['user_error'] ?? $errors['reset_active'] ?? '' ?>
+        <?= $errors['invalid_email'] ?? $errors['null_user'] ?? $errors['reset_active'] ?? '' ?>
         </div>
         <? endif ?>
         <div class="relative w-full px-6 pt-10 pb-8 mx-auto bg-white shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
@@ -36,4 +35,4 @@
     </div>
 </main>
 
-<? require base_path('views/partials/footer.php'); ?>
+<?php require base_path('views/partials/footer.php'); ?>

@@ -7,7 +7,8 @@ return [
         'charset' => 'utf8mb4'
     ],
     'siteLangs' => [
-        'ro',
-        'en'
+        'ro' => 'Română',
+        'en' => 'English',
+        'fr' => 'French'
     ]
 ];

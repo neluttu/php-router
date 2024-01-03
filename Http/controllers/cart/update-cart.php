@@ -10,4 +10,4 @@ Session::flash('cart_message', [
                     'result' => $result
             ]);
 
-return redirect('/cart');
+return redirect(Session::getLang() . '/cart');
